@@ -48,8 +48,8 @@
                                 <x-input id="max_people" class="block mt-1 w-full" type="number" name="max_people" required />
                             </div>
                             <div class="flex space-x-4 justify-around">
-                                <input type="radio" name="is_visible" value="1" checked />Show
-                                <input type="radio" name="is_visible" value="0" /> No Show
+                                <input type="radio" name="is_visible" value="1" checked /> Desplay
+                                <input type="radio" name="is_visible" value="0" /> No Desplay
                             </div>
                             <x-button class="ml-4">
                                 New Create
