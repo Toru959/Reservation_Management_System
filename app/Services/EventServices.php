@@ -5,7 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class EventService
+class EventServices
 {
 
     public static function checkEventDuplication($eventDate, $startTime, $endTime)
