@@ -24,6 +24,9 @@
                     <x-nav-link href="{{ route('events.create') }}" :active="request()->routeIs('events.create')">
                         新規登録
                     </x-nav-link>
+                    <x-nav-link href="{{ route('events.past') }}" :active="request()->routeIs('events.past')">
+                        過去のイベント
+                    </x-nav-link>
                     @endcan
                 </div>
             </div>
@@ -156,6 +159,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('events.create') }}" :active="request()->routeIs('events.create')">
                 新規登録
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('events.past') }}" :active="request()->routeIs('events.past')">
+                過去のイベント
             </x-responsive-nav-link>
             @endcan
         </div>
