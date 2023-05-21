@@ -45,27 +45,20 @@ class EventController extends Controller
     {
 
         $check = EventService::checkEventDuplication($request['event_date'], $request['start_time'], $request['end_time']);
-        // dd($check);
 
         if($check){
             session()->flash('status', 'There are already users at that time. Please change the time of use.');
             return view('manager.events.create');
         }
 
-        $start = $request['event_date']."".$request['start_time'];
-        $end = $request['event_date']."".$request['end_time'];
-        $start_date = Carbon::createFromFormat(
-            'Y-m-d H:i', $start
-        );
-        $end_date = Carbon::createFromFormat(
-            'Y-m-d H:i', $end
-        );
-
+        $startDate = EventService::joinDateAndTime($request['event_date'], $request['start_time']);
+        $endDate = EventService::joinDateAndTime($request['event_date'], $request['end_time']);
+       
         Event::create([
             'name' => $request['event_name'],
             'information' => $request['information'],
-            'start_date' => $start_date,
-            'end_date' => $end_date,
+            'start_date' => $startDate,
+            'end_date' => $endDate,
             'max_people' => $request['max_people'],
             'is_visible' => $request['is_visible'],
         ]);
