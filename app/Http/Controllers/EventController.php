@@ -98,6 +98,11 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         $event = Event::findOrFail($event->id);
+        $today = Carbon::today()->format('Y/m/d'); // 過去のイベントをurlで叩くとエラーページを返す。
+        if($event->eventDate < $today){
+            return abort(404);
+        }
+        
         $startTime = $event->startTime;
         $endTime = $event->endTime;
         $eventDate = $event->editEventDate;
