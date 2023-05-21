@@ -10,6 +10,11 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <section class="text-gray-600 body-font">
                     <div class="container px-5 py-4 mx-auto">
+                        @if (session('status'))
+                        <div class="mb-4 font-medium text-sm text-green-600">
+                            {{ session('status') }}
+                        </div>
+                        @endif
                       <div class="flex flex-col text-center w-full mb-20">
                       <div class="w-full mx-auto overflow-auto">
                         <table class="table-auto w-full text-left whitespace-no-wrap">
