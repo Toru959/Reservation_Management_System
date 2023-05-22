@@ -18,7 +18,7 @@ use Illuminate\Foundation\Console\EventListCommand;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('calendar');
 });
 
 Route::middleware([
