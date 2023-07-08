@@ -28,6 +28,9 @@
                         過去のイベント
                     </x-nav-link>
                     @endcan
+                    <x-nav-link href="{{ route('mypage.index') }}" :active="request()->routeIs('mypage.index')">
+                        マイページ
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -164,6 +167,9 @@
                 過去のイベント
             </x-responsive-nav-link>
             @endcan
+            <x-nav-link href="{{ route('mypage.index') }}" :active="request()->routeIs('mypage.index')">
+                マイページ
+            </x-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
