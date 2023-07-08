@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            イベント新規登録
+            イベント詳細
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pt-4 pd-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="max-w-2xl py-5 mx-auto">
@@ -18,47 +18,61 @@
                         </div>
                     @endif
             
-                    <form method="POST" action="{{ route('events.store') }}">
-                        @csrf           
+                    <form method="post" action="{{ route('events.reserve', ['id' => $event->id]) }}">       
+                        @csrf
                         <div class="mt-4">
                             <x-label for="event_name" value="Evnet Name" />
-                            <x-input id="event_name" class="block mt-1 w-full" type="text" name="event_name" :value="old('event_name')" required autofocus autocomplete="username" />
+                           {{ $event->name }}
                         </div>
                         <div class="mt-4">
                             <x-label for="information" value="Evnet Details" />
-                            <x-textarea row="3" id="information" name="information" class="block mt-1 w-full">{{ old('information') }}</x-textarea>
+                            {!! nl2br(e($event->information)) !!}
                         </div>           
                         <div class="md:flex justify-between">
                             <div class="mt-4">
                                 <x-label for="event_date" value="Event Date" />
-                                <x-input id="event_date" class="block mt-1 w-full" type="text" name="event_date" required />
+                                {{ $event->eventDate }}
                             </div>
                             <div class="mt-4">
                                 <x-label for="start_time" value="Sart Time" />
-                                <x-input id="start_time" class="block mt-1 w-full" type="text" name="start_time" required />
+                                {{ $event->startTime }}
                             </div>
                             <div class="mt-4">
                                 <x-label for="end_time" value="End Time" />
-                                <x-input id="end_time" class="block mt-1 w-full" type="text" name="end_time" required />
+                                {{ $event->endTime }}
                             </div>
                         </div>
                         <div class="md:flex justify-between items-end">
                             <div class="mt-4">
                                 <x-label for="max_people" value="Max People" />
-                                <x-input id="max_people" class="block mt-1 w-full" type="number" name="max_people" required />
+                                {{ $event->max_people }}
                             </div>
-                            <div class="flex space-x-4 justify-around">
-                                <input type="radio" name="is_visible" value="1" checked /> Desplay
-                                <input type="radio" name="is_visible" value="0" /> No Desplay
+                            <div class="mt-4">
+                                @if($reservablePeople <= 0)
+                                    <span class="text-red-500 text-xs">This event is full.</span>
+                                @else
+                                <x-label for="reserved_people" value="Reserved People" />
+                                <select name="reserved_people">
+                                    @for($i = 1; $i <= $reservablePeople; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                                @endif
                             </div>
-                            <x-button class="ml-4">
-                                New Create
-                            </x-button>
+                            @if($isReserved === null)
+                                <input type="hidden" name="id" value="{{ $event->id }}">
+                                @if($reservablePeople > 0)
+                                <x-button class="ml-4">
+                                    Reserve
+                                </x-button>
+                                @endif
+                            @else
+                                <span class="text-xs">This event has already been booked</span>
+                            @endif
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/flatpickr.js'])
 </x-app-layout>
